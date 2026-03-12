@@ -1,0 +1,5 @@
+com\revature\generator\dtos\PasswordGenerateRequest.class
+com\revature\generator\controllers\PasswordGeneratorController.class
+com\revature\generator\services\PasswordGeneratorService.class
+com\revature\generator\dtos\PasswordGenerateResponse.class
+com\revature\generator\GeneratorServiceApplication.class

@@ -1,0 +1,380 @@
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] RevPasswordManager-Microservices                                   [pom]
+[INFO] eureka-server                                                      [jar]
+[INFO] config-server                                                      [jar]
+[INFO] api-gateway                                                        [jar]
+[INFO] user-service                                                       [jar]
+[INFO] vault-service                                                      [jar]
+[INFO] generator-service                                                  [jar]
+[INFO] security-service                                                   [jar]
+[INFO] notification-service                                               [jar]
+[INFO] 
+[INFO] -----------< com.revature:revpasswordmanager-microservices >------------
+[INFO] Building RevPasswordManager-Microservices 1.0.0-SNAPSHOT           [1/9]
+[INFO]   from pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ revpasswordmanager-microservices ---
+[INFO] 
+[INFO] --- install:3.1.2:install (default-install) @ revpasswordmanager-microservices ---
+[INFO] Installing C:\Users\DELL\Downloads\RevPassword_Manager-Microservices\pom.xml to C:\Users\DELL\.m2\repository\com\revature\revpasswordmanager-microservices\1.0.0-SNAPSHOT\revpasswordmanager-microservices-1.0.0-SNAPSHOT.pom
+[INFO] 
+[INFO] ---------------------< com.revature:eureka-server >---------------------
+[INFO] Building eureka-server 1.0.0-SNAPSHOT                              [2/9]
+[INFO]   from infrastructure\eureka-server\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ eureka-server ---
+[INFO] Deleting C:\Users\DELL\Downloads\RevPassword_Manager-Microservices\infrastructure\eureka-server\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ eureka-server ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ eureka-server ---
+[INFO] Recompiling the module because of changed source code.
+[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!
+[INFO] Compiling 1 source file with javac [debug target 1.8] to target\classes
+[WARNING] bootstrap class path not set in conjunction with -source 8
+[WARNING] source value 8 is obsolete and will be removed in a future release
+[WARNING] target value 8 is obsolete and will be removed in a future release
+[WARNING] To suppress warnings about obsolete options, use -Xlint:-options.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ eureka-server ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] skip non existing resourceDirectory C:\Users\DELL\Downloads\RevPassword_Manager-Microservices\infrastructure\eureka-server\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ eureka-server ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ eureka-server ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.4.1:jar (default-jar) @ eureka-server ---
+[INFO] Building jar: C:\Users\DELL\Downloads\RevPassword_Manager-Microservices\infrastructure\eureka-server\target\eureka-server-1.0.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- install:3.1.2:install (default-install) @ eureka-server ---
+[INFO] Installing C:\Users\DELL\Downloads\RevPassword_Manager-Microservices\infrastructure\eureka-server\pom.xml to C:\Users\DELL\.m2\repository\com\revature\eureka-server\1.0.0-SNAPSHOT\eureka-server-1.0.0-SNAPSHOT.pom
+[INFO] Installing C:\Users\DELL\Downloads\RevPassword_Manager-Microservices\infrastructure\eureka-server\target\eureka-server-1.0.0-SNAPSHOT.jar to C:\Users\DELL\.m2\repository\com\revature\eureka-server\1.0.0-SNAPSHOT\eureka-server-1.0.0-SNAPSHOT.jar
+[INFO] 
+[INFO] ---------------------< com.revature:config-server >---------------------
+[INFO] Building config-server 1.0.0-SNAPSHOT                              [3/9]
+[INFO]   from infrastructure\config-server\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ config-server ---
+[INFO] Deleting C:\Users\DELL\Downloads\RevPassword_Manager-Microservices\infrastructure\config-server\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ config-server ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ config-server ---
+[INFO] Recompiling the module because of changed source code.
+[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!
+[INFO] Compiling 1 source file with javac [debug target 1.8] to target\classes
+[WARNING] bootstrap class path not set in conjunction with -source 8
+[WARNING] source value 8 is obsolete and will be removed in a future release
+[WARNING] target value 8 is obsolete and will be removed in a future release
+[WARNING] To suppress warnings about obsolete options, use -Xlint:-options.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ config-server ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] skip non existing resourceDirectory C:\Users\DELL\Downloads\RevPassword_Manager-Microservices\infrastructure\config-server\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ config-server ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ config-server ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.4.1:jar (default-jar) @ config-server ---
+[INFO] Building jar: C:\Users\DELL\Downloads\RevPassword_Manager-Microservices\infrastructure\config-server\target\config-server-1.0.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- install:3.1.2:install (default-install) @ config-server ---
+[INFO] Installing C:\Users\DELL\Downloads\RevPassword_Manager-Microservices\infrastructure\config-server\pom.xml to C:\Users\DELL\.m2\repository\com\revature\config-server\1.0.0-SNAPSHOT\config-server-1.0.0-SNAPSHOT.pom
+[INFO] Installing C:\Users\DELL\Downloads\RevPassword_Manager-Microservices\infrastructure\config-server\target\config-server-1.0.0-SNAPSHOT.jar to C:\Users\DELL\.m2\repository\com\revature\config-server\1.0.0-SNAPSHOT\config-server-1.0.0-SNAPSHOT.jar
+[INFO] 
+[INFO] ----------------------< com.revature:api-gateway >----------------------
+[INFO] Building api-gateway 1.0.0-SNAPSHOT                                [4/9]
+[INFO]   from infrastructure\api-gateway\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ api-gateway ---
+[INFO] Deleting C:\Users\DELL\Downloads\RevPassword_Manager-Microservices\infrastructure\api-gateway\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ api-gateway ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ api-gateway ---
+[INFO] Recompiling the module because of changed source code.
+[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!
+[INFO] Compiling 2 source files with javac [debug target 1.8] to target\classes
+[WARNING] bootstrap class path not set in conjunction with -source 8
+[WARNING] source value 8 is obsolete and will be removed in a future release
+[WARNING] target value 8 is obsolete and will be removed in a future release
+[WARNING] To suppress warnings about obsolete options, use -Xlint:-options.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ api-gateway ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] skip non existing resourceDirectory C:\Users\DELL\Downloads\RevPassword_Manager-Microservices\infrastructure\api-gateway\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ api-gateway ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ api-gateway ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.4.1:jar (default-jar) @ api-gateway ---
+[INFO] Building jar: C:\Users\DELL\Downloads\RevPassword_Manager-Microservices\infrastructure\api-gateway\target\api-gateway-1.0.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- install:3.1.2:install (default-install) @ api-gateway ---
+[INFO] Installing C:\Users\DELL\Downloads\RevPassword_Manager-Microservices\infrastructure\api-gateway\pom.xml to C:\Users\DELL\.m2\repository\com\revature\api-gateway\1.0.0-SNAPSHOT\api-gateway-1.0.0-SNAPSHOT.pom
+[INFO] Installing C:\Users\DELL\Downloads\RevPassword_Manager-Microservices\infrastructure\api-gateway\target\api-gateway-1.0.0-SNAPSHOT.jar to C:\Users\DELL\.m2\repository\com\revature\api-gateway\1.0.0-SNAPSHOT\api-gateway-1.0.0-SNAPSHOT.jar
+[INFO] 
+[INFO] ---------------------< com.revature:user-service >----------------------
+[INFO] Building user-service 1.0.0-SNAPSHOT                               [5/9]
+[INFO]   from microservices\user-service\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ user-service ---
+[INFO] Deleting C:\Users\DELL\Downloads\RevPassword_Manager-Microservices\microservices\user-service\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ user-service ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ user-service ---
+[INFO] Recompiling the module because of changed source code.
+[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!
+[INFO] Compiling 33 source files with javac [debug target 1.8] to target\classes
+[WARNING] bootstrap class path not set in conjunction with -source 8
+[WARNING] source value 8 is obsolete and will be removed in a future release
+[WARNING] target value 8 is obsolete and will be removed in a future release
+[WARNING] To suppress warnings about obsolete options, use -Xlint:-options.
+[INFO] Annotation processing is enabled because one or more processors were found
+  on the class path. A future release of javac may disable annotation processing
+  unless at least one processor is specified by name (-processor), or a search
+  path is specified (--processor-path, --processor-module-path), or annotation
+  processing is enabled explicitly (-proc:only, -proc:full).
+  Use -Xlint:-options to suppress this message.
+  Use -proc:none to disable annotation processing.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ user-service ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] skip non existing resourceDirectory C:\Users\DELL\Downloads\RevPassword_Manager-Microservices\microservices\user-service\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ user-service ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ user-service ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.4.1:jar (default-jar) @ user-service ---
+[INFO] Building jar: C:\Users\DELL\Downloads\RevPassword_Manager-Microservices\microservices\user-service\target\user-service-1.0.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- install:3.1.2:install (default-install) @ user-service ---
+[INFO] Installing C:\Users\DELL\Downloads\RevPassword_Manager-Microservices\microservices\user-service\pom.xml to C:\Users\DELL\.m2\repository\com\revature\user-service\1.0.0-SNAPSHOT\user-service-1.0.0-SNAPSHOT.pom
+[INFO] Installing C:\Users\DELL\Downloads\RevPassword_Manager-Microservices\microservices\user-service\target\user-service-1.0.0-SNAPSHOT.jar to C:\Users\DELL\.m2\repository\com\revature\user-service\1.0.0-SNAPSHOT\user-service-1.0.0-SNAPSHOT.jar
+[INFO] 
+[INFO] ---------------------< com.revature:vault-service >---------------------
+[INFO] Building vault-service 1.0.0-SNAPSHOT                              [6/9]
+[INFO]   from microservices\vault-service\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ vault-service ---
+[INFO] Deleting C:\Users\DELL\Downloads\RevPassword_Manager-Microservices\microservices\vault-service\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ vault-service ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ vault-service ---
+[INFO] Recompiling the module because of changed source code.
+[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!
+[INFO] Compiling 11 source files with javac [debug target 1.8] to target\classes
+[WARNING] bootstrap class path not set in conjunction with -source 8
+[WARNING] source value 8 is obsolete and will be removed in a future release
+[WARNING] target value 8 is obsolete and will be removed in a future release
+[WARNING] To suppress warnings about obsolete options, use -Xlint:-options.
+[INFO] Annotation processing is enabled because one or more processors were found
+  on the class path. A future release of javac may disable annotation processing
+  unless at least one processor is specified by name (-processor), or a search
+  path is specified (--processor-path, --processor-module-path), or annotation
+  processing is enabled explicitly (-proc:only, -proc:full).
+  Use -Xlint:-options to suppress this message.
+  Use -proc:none to disable annotation processing.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ vault-service ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] skip non existing resourceDirectory C:\Users\DELL\Downloads\RevPassword_Manager-Microservices\microservices\vault-service\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ vault-service ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ vault-service ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.4.1:jar (default-jar) @ vault-service ---
+[INFO] Building jar: C:\Users\DELL\Downloads\RevPassword_Manager-Microservices\microservices\vault-service\target\vault-service-1.0.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- install:3.1.2:install (default-install) @ vault-service ---
+[INFO] Installing C:\Users\DELL\Downloads\RevPassword_Manager-Microservices\microservices\vault-service\pom.xml to C:\Users\DELL\.m2\repository\com\revature\vault-service\1.0.0-SNAPSHOT\vault-service-1.0.0-SNAPSHOT.pom
+[INFO] Installing C:\Users\DELL\Downloads\RevPassword_Manager-Microservices\microservices\vault-service\target\vault-service-1.0.0-SNAPSHOT.jar to C:\Users\DELL\.m2\repository\com\revature\vault-service\1.0.0-SNAPSHOT\vault-service-1.0.0-SNAPSHOT.jar
+[INFO] 
+[INFO] -------------------< com.revature:generator-service >-------------------
+[INFO] Building generator-service 1.0.0-SNAPSHOT                          [7/9]
+[INFO]   from microservices\generator-service\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ generator-service ---
+[INFO] Deleting C:\Users\DELL\Downloads\RevPassword_Manager-Microservices\microservices\generator-service\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ generator-service ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ generator-service ---
+[INFO] Recompiling the module because of changed source code.
+[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!
+[INFO] Compiling 6 source files with javac [debug target 1.8] to target\classes
+[WARNING] bootstrap class path not set in conjunction with -source 8
+[WARNING] source value 8 is obsolete and will be removed in a future release
+[WARNING] target value 8 is obsolete and will be removed in a future release
+[WARNING] To suppress warnings about obsolete options, use -Xlint:-options.
+[INFO] Annotation processing is enabled because one or more processors were found
+  on the class path. A future release of javac may disable annotation processing
+  unless at least one processor is specified by name (-processor), or a search
+  path is specified (--processor-path, --processor-module-path), or annotation
+  processing is enabled explicitly (-proc:only, -proc:full).
+  Use -Xlint:-options to suppress this message.
+  Use -proc:none to disable annotation processing.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ generator-service ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] skip non existing resourceDirectory C:\Users\DELL\Downloads\RevPassword_Manager-Microservices\microservices\generator-service\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ generator-service ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ generator-service ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.4.1:jar (default-jar) @ generator-service ---
+[INFO] Building jar: C:\Users\DELL\Downloads\RevPassword_Manager-Microservices\microservices\generator-service\target\generator-service-1.0.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- install:3.1.2:install (default-install) @ generator-service ---
+[INFO] Installing C:\Users\DELL\Downloads\RevPassword_Manager-Microservices\microservices\generator-service\pom.xml to C:\Users\DELL\.m2\repository\com\revature\generator-service\1.0.0-SNAPSHOT\generator-service-1.0.0-SNAPSHOT.pom
+[INFO] Installing C:\Users\DELL\Downloads\RevPassword_Manager-Microservices\microservices\generator-service\target\generator-service-1.0.0-SNAPSHOT.jar to C:\Users\DELL\.m2\repository\com\revature\generator-service\1.0.0-SNAPSHOT\generator-service-1.0.0-SNAPSHOT.jar
+[INFO] 
+[INFO] -------------------< com.revature:security-service >--------------------
+[INFO] Building security-service 1.0.0-SNAPSHOT                           [8/9]
+[INFO]   from microservices\security-service\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ security-service ---
+[INFO] Deleting C:\Users\DELL\Downloads\RevPassword_Manager-Microservices\microservices\security-service\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ security-service ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ security-service ---
+[INFO] Recompiling the module because of changed source code.
+[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!
+[INFO] Compiling 5 source files with javac [debug target 1.8] to target\classes
+[WARNING] bootstrap class path not set in conjunction with -source 8
+[WARNING] source value 8 is obsolete and will be removed in a future release
+[WARNING] target value 8 is obsolete and will be removed in a future release
+[WARNING] To suppress warnings about obsolete options, use -Xlint:-options.
+[INFO] Annotation processing is enabled because one or more processors were found
+  on the class path. A future release of javac may disable annotation processing
+  unless at least one processor is specified by name (-processor), or a search
+  path is specified (--processor-path, --processor-module-path), or annotation
+  processing is enabled explicitly (-proc:only, -proc:full).
+  Use -Xlint:-options to suppress this message.
+  Use -proc:none to disable annotation processing.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ security-service ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] skip non existing resourceDirectory C:\Users\DELL\Downloads\RevPassword_Manager-Microservices\microservices\security-service\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ security-service ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ security-service ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.4.1:jar (default-jar) @ security-service ---
+[INFO] Building jar: C:\Users\DELL\Downloads\RevPassword_Manager-Microservices\microservices\security-service\target\security-service-1.0.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- install:3.1.2:install (default-install) @ security-service ---
+[INFO] Installing C:\Users\DELL\Downloads\RevPassword_Manager-Microservices\microservices\security-service\pom.xml to C:\Users\DELL\.m2\repository\com\revature\security-service\1.0.0-SNAPSHOT\security-service-1.0.0-SNAPSHOT.pom
+[INFO] Installing C:\Users\DELL\Downloads\RevPassword_Manager-Microservices\microservices\security-service\target\security-service-1.0.0-SNAPSHOT.jar to C:\Users\DELL\.m2\repository\com\revature\security-service\1.0.0-SNAPSHOT\security-service-1.0.0-SNAPSHOT.jar
+[INFO] 
+[INFO] -----------------< com.revature:notification-service >------------------
+[INFO] Building notification-service 1.0.0-SNAPSHOT                       [9/9]
+[INFO]   from microservices\notification-service\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ notification-service ---
+[INFO] Deleting C:\Users\DELL\Downloads\RevPassword_Manager-Microservices\microservices\notification-service\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ notification-service ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ notification-service ---
+[INFO] Recompiling the module because of changed source code.
+[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!
+[INFO] Compiling 8 source files with javac [debug target 1.8] to target\classes
+[WARNING] bootstrap class path not set in conjunction with -source 8
+[WARNING] source value 8 is obsolete and will be removed in a future release
+[WARNING] target value 8 is obsolete and will be removed in a future release
+[WARNING] To suppress warnings about obsolete options, use -Xlint:-options.
+[INFO] Annotation processing is enabled because one or more processors were found
+  on the class path. A future release of javac may disable annotation processing
+  unless at least one processor is specified by name (-processor), or a search
+  path is specified (--processor-path, --processor-module-path), or annotation
+  processing is enabled explicitly (-proc:only, -proc:full).
+  Use -Xlint:-options to suppress this message.
+  Use -proc:none to disable annotation processing.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ notification-service ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] skip non existing resourceDirectory C:\Users\DELL\Downloads\RevPassword_Manager-Microservices\microservices\notification-service\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ notification-service ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ notification-service ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.4.1:jar (default-jar) @ notification-service ---
+[INFO] Building jar: C:\Users\DELL\Downloads\RevPassword_Manager-Microservices\microservices\notification-service\target\notification-service-1.0.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- install:3.1.2:install (default-install) @ notification-service ---
+[INFO] Installing C:\Users\DELL\Downloads\RevPassword_Manager-Microservices\microservices\notification-service\pom.xml to C:\Users\DELL\.m2\repository\com\revature\notification-service\1.0.0-SNAPSHOT\notification-service-1.0.0-SNAPSHOT.pom
+[INFO] Installing C:\Users\DELL\Downloads\RevPassword_Manager-Microservices\microservices\notification-service\target\notification-service-1.0.0-SNAPSHOT.jar to C:\Users\DELL\.m2\repository\com\revature\notification-service\1.0.0-SNAPSHOT\notification-service-1.0.0-SNAPSHOT.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for RevPasswordManager-Microservices 1.0.0-SNAPSHOT:
+[INFO] 
+[INFO] RevPasswordManager-Microservices ................... SUCCESS [  0.306 s]
+[INFO] eureka-server ...................................... SUCCESS [  3.836 s]
+[INFO] config-server ...................................... SUCCESS [  0.944 s]
+[INFO] api-gateway ........................................ SUCCESS [  1.160 s]
+[INFO] user-service ....................................... SUCCESS [  3.846 s]
+[INFO] vault-service ...................................... SUCCESS [  1.932 s]
+[INFO] generator-service .................................. SUCCESS [  1.569 s]
+[INFO] security-service ................................... SUCCESS [  1.014 s]
+[INFO] notification-service ............................... SUCCESS [  1.185 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  16.441 s
+[INFO] Finished at: 2026-03-11T23:21:06+05:30
+[INFO] ------------------------------------------------------------------------

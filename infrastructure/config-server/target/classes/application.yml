@@ -1,0 +1,19 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: config-server
+  profiles:
+    active: native # Using native profile for local development without connecting to a Git repo
+  cloud:
+    config:
+      server:
+        native:
+          # In a real app this could point to Git, here using a local search location, or just default.
+          search-locations: classpath:/shared-config
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/

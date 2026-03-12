@@ -1,0 +1,3 @@
+com\revature\gateway\filter\JwtAuthenticationFilter.class
+com\revature\gateway\ApiGatewayApplication.class
+com\revature\gateway\filter\JwtAuthenticationFilter$Config.class
