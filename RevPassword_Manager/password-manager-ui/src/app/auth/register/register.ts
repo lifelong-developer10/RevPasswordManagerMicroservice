@@ -151,7 +151,7 @@ nextStep() {
 
   // ================= REGISTER =================
 register() {
- 
+
    if (this.form.invalid) {
      alert('Please fill all required fields');
      return;
@@ -162,7 +162,7 @@ register() {
      alert('Please answer all 3 security questions');
      return;
    }
- 
+
    const payload = {
      ...this.form.value,
      securityAnswers: this.questions.map(q => ({
@@ -170,9 +170,9 @@ register() {
        answer: q.answer
      }))
    };
- 
+
    console.log('REGISTER PAYLOAD', payload);
- 
+
    this.auth.register(payload).subscribe({
      next: () => {
          localStorage.removeItem('generatedPassword');
