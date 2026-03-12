@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 
@@ -102,9 +104,7 @@ resetPassword(data: any) {
   );
 }
 checkUser(username: string) {
-  return this.http.get(
-    `${this.forgotBaseUrl}/forgot/user-exists/${username}`
-  );
+  return this.http.get(`http://localhost:8080/api/forgot/user-exists?username=${username}`)
 }
 enable2FA() {
   return this.http.post(`${this.baseUrl}/api/auth/2fa/enable`, {});
