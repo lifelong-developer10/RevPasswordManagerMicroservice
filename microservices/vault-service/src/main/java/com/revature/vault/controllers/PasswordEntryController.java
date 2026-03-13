@@ -42,11 +42,12 @@ public class PasswordEntryController {
 
     @PutMapping("/{id}")
     public PasswordEntryResponse update(
+            @RequestHeader("X-Logged-In-Username") String username,
             @PathVariable Long id,
             @Valid @RequestBody PasswordEntryRequest request)
             throws Exception {
 
-        return service.updateEntry(id, request);
+        return service.updateEntry(username, id, request);
     }
 
     @GetMapping("/export/csv")
@@ -121,5 +122,11 @@ public class PasswordEntryController {
         service.importVault(username, file.getBytes(), password);
 
         return org.springframework.http.ResponseEntity.ok("Vault Imported Successfully");
+    }
+
+    @GetMapping("/audit-report")
+    public java.util.Map<String, Object> getAuditReport(
+            @RequestHeader("X-Logged-In-Username") String username) throws Exception {
+        return service.getAuditReport(username);
     }
 }

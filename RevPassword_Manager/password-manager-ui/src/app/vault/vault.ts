@@ -130,34 +130,44 @@ openEdit(v: any) {
     const isInvalid = !f.accountName?.trim() || !f.website?.trim() || !f.username?.trim() || !f.password?.trim() || !f.category?.trim();
 
     if (isInvalid) {
-      Swal.fire({ icon: 'warning', title: 'Validation Error', text: 'Please fill in all required fields.' });
+      Swal.fire({ 
+        icon: 'warning', 
+        title: 'Invalid Input', 
+        text: 'Fields cannot be empty. Please fill all required details.' 
+      });
       return;
     }
 
     if (this.editMode && this.form.id) {
+      console.log('Sending update for ID:', this.form.id, this.form);
       this.vaultService.update(this.form.id, this.form).subscribe({
         next: () => {
           Swal.fire({ icon: 'success', title: 'Updated', text: 'Account updated successfully' });
           this.loadVaults();
           this.showForm = false;
           this.editMode = false;
+          this.resetForm();
           this.cd.detectChanges();
         },
         error: err => {
-          const msg = err.error?.message || 'Update failed. Please check inputs.';
+          console.error('Update Error Object:', err);
+          const msg = err.error?.message || err.message || 'Update failed. Please check inputs.';
           Swal.fire({ icon: 'error', title: 'Error', text: msg });
         }
       });
     } else {
+      console.log('Sending create for:', this.form);
       this.vaultService.create(this.form).subscribe({
         next: () => {
           Swal.fire({ icon: 'success', title: 'Created', text: 'Account created successfully' });
           this.loadVaults();
           this.showForm = false;
+          this.resetForm();
           this.cd.detectChanges();
         },
         error: err => {
-          const msg = err.error?.message || 'Creation failed. Please check inputs.';
+          console.error('Create Error Object:', err);
+          const msg = err.error?.message || err.message || 'Creation failed. Please check inputs.';
           Swal.fire({ icon: 'error', title: 'Error', text: msg });
         }
       });
@@ -287,14 +297,21 @@ openEdit(v: any) {
     }
 
     this.vaultService.search(this.keyword)
-      .subscribe(res => this.vaults = res);
-    this.cd.detectChanges();   // ⭐ ADD
+      .subscribe(res => {
+        this.vaults = res || [];
+        this.filteredVaults = [...this.vaults];
+        this.cd.detectChanges();
+      });
 
   }
 
   loadFavorites() {
     this.vaultService.favorites()
-      .subscribe(res => this.vaults = res);
+      .subscribe(res => {
+        this.vaults = res || [];
+        this.filteredVaults = [...this.vaults];
+        this.cd.detectChanges();
+      });
   }
 
 toggleFavorites() {

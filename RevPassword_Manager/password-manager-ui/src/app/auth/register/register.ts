@@ -181,7 +181,7 @@ register() {
      },
      error: (err) => {
        console.error(err);
-       alert(err.error?.error || 'Registration failed');
+       Swal.fire(err.error?.error || 'Registration failed');
      }
    });
  }

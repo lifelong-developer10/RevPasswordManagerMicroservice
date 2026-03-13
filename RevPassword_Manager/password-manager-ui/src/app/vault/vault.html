@@ -53,7 +53,7 @@
                    [(ngModel)]="form.password"
                    (input)="updateStrength(form.password)"
                    required>
-            <button class="btn btn-outline-secondary" type="button" (click)="generatePassword()">
+            <button *ngIf="!editMode" class="btn btn-outline-secondary" type="button" (click)="generatePassword()">
                 Generate
             </button>
             <button class="btn btn-outline-info" type="button" (click)="copyToClipboard()">
@@ -70,7 +70,7 @@
         </div>
 
         <!-- GENERATOR OPTIONS -->
-        <div class="generator-options mb-3 small p-2 border rounded">
+        <div class="generator-options mb-3 small p-2 border rounded" *ngIf="!editMode">
             <label class="d-block mb-1">Length: {{genOptions.length}}</label>
             <input type="range" class="form-range" min="8" max="32" [(ngModel)]="genOptions.length">
             

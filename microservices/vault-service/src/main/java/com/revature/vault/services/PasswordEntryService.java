@@ -22,6 +22,7 @@ public class PasswordEntryService {
 
 
 
+    @Transactional
     public PasswordEntryResponse addEntry(
             String username,
             PasswordEntryRequest request) throws Exception {
@@ -94,20 +95,27 @@ public class PasswordEntryService {
         return mapToResponse(entry);
     }
 
+    @Transactional
     public PasswordEntryResponse updateEntry(
+            String ownerUsername,
             Long id,
             PasswordEntryRequest request) throws Exception {
 
-        System.out.println("Updating entry ID: " + id);
+        System.out.println("Updating entry ID: " + id + " for user: " + ownerUsername);
 
         AllPasswordEntry entry = repo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Entry not found with id: " + id));
+
+        // Security check: ensure the requester owns this entry
+        if (!entry.getOwnerUsername().equals(ownerUsername)) {
+            throw new RuntimeException("Unauthorized: You do not own this entry.");
+        }
 
         entry.setAccountName(request.getAccountName());
         entry.setWebsite(request.getWebsite());
         entry.setUsername(request.getUsername());
 
-        if (request.getPassword() != null && !request.getPassword().isEmpty()) {
+        if (request.getPassword() != null && !request.getPassword().trim().isEmpty()) {
             entry.setPasswordEncrypted(encryptionUtil.encrypt(request.getPassword()));
         }
 
@@ -201,6 +209,41 @@ public class PasswordEntryService {
         for (PasswordEntryRequest req : entries) {
             addEntry(username, req);
         }
+    }
+
+    public java.util.Map<String, Object> getAuditReport(String username) throws Exception {
+        List<PasswordEntryResponse> entries = getAllEntries(username);
+        long weak = 0, medium = 0, strong = 0, veryStrong = 0;
+        
+        for (PasswordEntryResponse e : entries) {
+            int score = calculateScore(e.getPassword());
+            if (score <= 2) weak++;
+            else if (score <= 4) medium++;
+            else if (score == 5) strong++;
+            else veryStrong++;
+        }
+
+        java.util.Map<String, Object> report = new java.util.HashMap<>();
+        report.put("total", entries.size());
+        report.put("weak", weak);
+        report.put("medium", medium);
+        report.put("strong", strong);
+        report.put("veryStrong", veryStrong);
+        report.put("timestamp", LocalDateTime.now());
+        
+        return report;
+    }
+
+    private int calculateScore(String p) {
+        int score = 0;
+        if (p == null) return 0;
+        if (p.length() >= 8) score++;
+        if (p.length() >= 12) score++;
+        if (p.matches(".*[A-Z].*")) score++;
+        if (p.matches(".*[a-z].*")) score++;
+        if (p.matches(".*[0-9].*")) score++;
+        if (p.matches(".*[!@#$%^&*()].*")) score++;
+        return score;
     }
 
     private PasswordEntryResponse mapToResponse(

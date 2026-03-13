@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
 import { RouterModule } from '@angular/router';
 import { Component, ViewEncapsulation } from '@angular/core';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -78,13 +79,13 @@ login() {
 
        localStorage.setItem('token', res.token);
       localStorage.removeItem('generatedPassword');
-       alert('Login Successful');
+        Swal.fire('Login Successful');
 
        this.router.navigate(['/dashboard']);
      },
 
      error: () => {
-       alert('Invalid Credentials');
+       Swal.fire('Invalid Credentials');
      }
 
    });
