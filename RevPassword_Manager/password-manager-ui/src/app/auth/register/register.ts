@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-register',
   standalone: true,
@@ -120,7 +120,7 @@ step = 1;
 nextStep() {
 
   if (this.form.invalid) {
-    alert('Please fill all required fields');
+    Swal.fire('Please fill all required fields');
     return;
   }
 
@@ -153,13 +153,13 @@ nextStep() {
 register() {
 
    if (this.form.invalid) {
-     alert('Please fill all required fields');
+     Swal.fire('Please fill all required fields');
      return;
    }
 
    const allAnswered = this.questions.every(q => q.answer && q.answer.trim().length > 0);
    if (!allAnswered) {
-     alert('Please answer all 3 security questions');
+  Swal.fire('Please answer all 3 security questions');
      return;
    }
 
@@ -176,7 +176,7 @@ register() {
    this.auth.register(payload).subscribe({
      next: () => {
          localStorage.removeItem('generatedPassword');
-       alert('Registration successful');
+      Swal.fire('Registration successful');
        this.router.navigate(['/login']);
      },
      error: (err) => {

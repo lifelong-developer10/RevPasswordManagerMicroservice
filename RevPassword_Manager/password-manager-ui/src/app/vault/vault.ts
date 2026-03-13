@@ -126,7 +126,10 @@ openEdit(v: any) {
   strengthLabel = '';
 
   save() {
-    if (!this.form.accountName || !this.form.website || !this.form.username || !this.form.password || !this.form.category) {
+    const f = this.form;
+    const isInvalid = !f.accountName?.trim() || !f.website?.trim() || !f.username?.trim() || !f.password?.trim() || !f.category?.trim();
+
+    if (isInvalid) {
       Swal.fire({ icon: 'warning', title: 'Validation Error', text: 'Please fill in all required fields.' });
       return;
     }

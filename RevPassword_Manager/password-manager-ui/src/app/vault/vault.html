@@ -113,7 +113,7 @@
 
           <button class="btn btn-save w-50"
                   (click)="save()"
-                  [disabled]="!form.accountName || !form.website || !form.username || !form.password || !form.category">
+                  [disabled]="!form.accountName?.trim() || !form.website?.trim() || !form.username?.trim() || !form.password?.trim() || !form.category?.trim()">
             Save
           </button>
 
