@@ -4,6 +4,7 @@ import com.revature.vault.dtos.PasswordEntryRequest;
 import com.revature.vault.dtos.PasswordEntryResponse;
 import com.revature.vault.models.AllPasswordEntry;
 import com.revature.vault.services.PasswordEntryService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +19,7 @@ public class PasswordEntryController {
     @PostMapping
     public PasswordEntryResponse add(
             @RequestHeader("X-Logged-In-Username") String username,
-            @RequestBody PasswordEntryRequest request)
+            @Valid   @RequestBody PasswordEntryRequest request)
             throws Exception {
 
         return service.addEntry(username, request);
@@ -42,10 +43,22 @@ public class PasswordEntryController {
     @PutMapping("/{id}")
     public PasswordEntryResponse update(
             @PathVariable Long id,
-            @RequestBody PasswordEntryRequest request)
+            @Valid @RequestBody PasswordEntryRequest request)
             throws Exception {
 
         return service.updateEntry(id, request);
+    }
+
+    @GetMapping("/export/csv")
+    public org.springframework.http.ResponseEntity<byte[]> exportCsv(
+            @RequestHeader("X-Logged-In-Username") String username) throws Exception {
+
+        byte[] data = service.exportVaultCsv(username);
+
+        return org.springframework.http.ResponseEntity.ok()
+                .header(org.springframework.http.HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=vault_export.csv")
+                .contentType(org.springframework.http.MediaType.parseMediaType("text/csv"))
+                .body(data);
     }
 
     @GetMapping("/last")

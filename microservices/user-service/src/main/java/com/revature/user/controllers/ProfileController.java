@@ -59,7 +59,6 @@ public class ProfileController {
 
         return ResponseEntity.ok(
                 Map.of("message", "Profile updated successfully",
-                        "name", updatedUser.getUsername(),
                         "email", updatedUser.getEmail(),
                         "phone", updatedUser.getPhone())
         );

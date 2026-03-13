@@ -15,7 +15,9 @@
                [(ngModel)]="searchText"
                (input)="searchVault()">
 
-
+        <button class="btn btn-primary" (click)="exportAccounts()">
+            <i class="fa fa-download"></i> Export Accounts
+        </button>
 
       </div>
 
@@ -32,22 +34,58 @@
 
         <input class="form-control mb-2"
                placeholder="Account Name"
-               [(ngModel)]="form.accountName">
+               [(ngModel)]="form.accountName"
+               required>
 
         <input class="form-control mb-2"
                placeholder="Website"
-               [(ngModel)]="form.website">
+               [(ngModel)]="form.website"
+               required>
 
         <input class="form-control mb-2"
                placeholder="Username"
-               [(ngModel)]="form.username">
+               [(ngModel)]="form.username"
+               required>
 
-        <input class="form-control mb-2"
-               placeholder="Password"
-               [(ngModel)]="form.password">
+        <div class="input-group mb-1">
+            <input class="form-control"
+                   placeholder="Password"
+                   [(ngModel)]="form.password"
+                   (input)="updateStrength(form.password)"
+                   required>
+            <button class="btn btn-outline-secondary" type="button" (click)="generatePassword()">
+                Generate
+            </button>
+            <button class="btn btn-outline-info" type="button" (click)="copyToClipboard()">
+                <i class="fa fa-copy"></i>
+            </button>
+        </div>
+
+        <!-- STRENGTH METER -->
+        <div class="strength-meter mb-2" *ngIf="form.password">
+            <div class="strength-bar" [style.width]="(strengthScore * 20) + '%'" 
+                 [style.background]="strengthScore < 2 ? '#ef4444' : strengthScore < 4 ? '#f59e0b' : '#10b981'">
+            </div>
+            <small class="strength-text">{{strengthLabel}}</small>
+        </div>
+
+        <!-- GENERATOR OPTIONS -->
+        <div class="generator-options mb-3 small p-2 border rounded">
+            <label class="d-block mb-1">Length: {{genOptions.length}}</label>
+            <input type="range" class="form-range" min="8" max="32" [(ngModel)]="genOptions.length">
+            
+            <div class="d-flex flex-wrap gap-2 mt-2">
+                <label><input type="checkbox" [(ngModel)]="genOptions.uppercase"> ABC</label>
+                <label><input type="checkbox" [(ngModel)]="genOptions.lowercase"> abc</label>
+                <label><input type="checkbox" [(ngModel)]="genOptions.numbers"> 123</label>
+                <label><input type="checkbox" [(ngModel)]="genOptions.symbols"> !@#</label>
+                <label title="Exclude 0, O, 1, l, I"><input type="checkbox" [(ngModel)]="genOptions.excludeSimilar"> Exclude Similar</label>
+            </div>
+        </div>
 
         <select class="form-control mb-2"
-                [(ngModel)]="form.category">
+                [(ngModel)]="form.category"
+                required>
 
           <option value="">Select Category</option>
           <option>Social</option>
@@ -74,7 +112,8 @@
         <div class="d-flex gap-2">
 
           <button class="btn btn-save w-50"
-                  (click)="save()">
+                  (click)="save()"
+                  [disabled]="!form.accountName || !form.website || !form.username || !form.password || !form.category">
             Save
           </button>
 
@@ -91,10 +130,10 @@
     <!-- GRID -->
     <div class="row g-4">
 
-      <div class="col-md-4"
-           *ngFor="let v of filteredVaults">
+      <div class="col-lg-4 col-md-6 col-sm-12"
+           *ngFor="let v of filteredVaults; trackBy: trackById">
 
-        <div class="vault-card">
+        <div class="vault-card h-100 d-flex flex-column">
 
           <!-- HEADER -->
           <div class="vault-header">
@@ -103,10 +142,10 @@
               <i class="fa fa-globe"></i>
             </div>
 
-            <div class="flex-grow-1">
+            <div class="flex-grow-1 overflow-hidden">
 
-              <h5>{{v.accountName}}</h5>
-              <small>{{v.website}}</small>
+              <h5 class="text-truncate" [title]="v.accountName">{{v.accountName}}</h5>
+              <small class="text-truncate d-block" [title]="v.website">{{v.website}}</small>
 
             </div>
 
@@ -117,37 +156,39 @@
           <hr>
 
           <!-- BODY -->
-          <p><strong>Username:</strong> {{v.username}}</p>
+          <div class="vault-body mb-3">
+            <p><strong>Username:</strong> {{v.username}}</p>
 
-          <p>
-            <strong>Password:</strong>
+            <p>
+              <strong>Password:</strong>
 
-            <span *ngIf="!v.show">••••••••</span>
-            <span *ngIf="v.show">{{v.password}}</span>
+              <span *ngIf="!v.show">••••••••</span>
+              <span *ngIf="v.show">{{v.password}}</span>
 
-            <i class="fa"
-               [ngClass]="v.show ? 'fa-eye-slash':'fa-eye'"
-               (click)="togglePassword(v)">
-            </i>
+              <i class="fa btn-icon"
+                 [ngClass]="v.show ? 'fa-eye-slash':'fa-eye'"
+                 (click)="togglePassword(v)">
+              </i>
 
-          </p>
+            </p>
 
-          <p>
-            <strong>Category:</strong>
-            <span class="badge">{{v.category}}</span>
-          </p>
+            <p>
+              <strong>Category:</strong>
+              <span class="badge">{{v.category}}</span>
+            </p>
 
-          <p class="notes">{{v.notes || '—'}}</p>
+            <p class="notes text-muted small">{{v.notes || 'No notes available'}}</p>
+          </div>
 
           <!-- ACTIONS -->
-          <div class="btn-row">
+          <div class="btn-row mt-auto d-flex gap-2">
 
-            <button class="btn btn-edit"
+            <button class="btn btn-edit flex-grow-1"
                     (click)="openEdit(v)">
               Edit
             </button>
 
-            <button class="btn btn-delete"
+            <button class="btn btn-delete flex-grow-1"
                     (click)="delete(v.id)">
               Delete
             </button>

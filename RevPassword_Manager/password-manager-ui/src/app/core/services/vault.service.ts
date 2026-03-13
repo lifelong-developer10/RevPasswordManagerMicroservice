@@ -40,4 +40,8 @@ export class VaultService {
 getLast() {
   return this.http.get<any>('http://localhost:8080/api/vault/last');
 }
+
+exportCsv() {
+  return this.http.get(`${this.API}/export/csv`, { responseType: 'blob' });
+}
 }

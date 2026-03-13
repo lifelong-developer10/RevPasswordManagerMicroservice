@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import {  Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { VaultService } from '../core/services/vault.service';
 import { ProfileService } from '../core/services/profile.service';
+import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.html',
@@ -138,11 +139,11 @@ addVault() {
 
       // clear form
       this.vault = {
-        accountName: '',
+        accountName: ['', Validators.required],
         website: '',
-        username: '',
-        password: '',
-        category: '',
+        username: ['', Validators.required],
+        password: ['', Validators.required],
+        category:['', Validators.required],
         notes: '',
         favorite: false
       };

@@ -13,18 +13,34 @@ public class AllPasswordEntry {
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long id;
 
-        private String accountName;
-        private String website;
-        private String username;
-        private String passwordEncrypted;
-        private String category;
-        private String notes;
-        private boolean favorite;
+    @Column(nullable = false, length = 100)
+    private String accountName;
 
-        private LocalDateTime createdAt;
-        private LocalDateTime updatedAt;
+    @Column(nullable = false, length = 255)
+    private String website;
 
-        private String ownerUsername;
+    @Column(nullable = false, length = 100)
+    private String username;
+
+    @Column(nullable = false, length = 512)
+    private String passwordEncrypted;
+
+    @Column(nullable = false, length = 50)
+    private String category;
+
+    @Column(length = 500)
+    private String notes;
+
+    private boolean favorite;
+
+    @Column(nullable = false, updatable = false)
+    private LocalDateTime createdAt;
+
+    @Column(nullable = false)
+    private LocalDateTime updatedAt;
+
+    @Column(nullable = false)
+    private String ownerUsername;
     }
 
 

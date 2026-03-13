@@ -98,14 +98,18 @@ public class PasswordEntryService {
             Long id,
             PasswordEntryRequest request) throws Exception {
 
-        AllPasswordEntry entry = repo.findById(id).orElseThrow();
+        System.out.println("Updating entry ID: " + id);
+
+        AllPasswordEntry entry = repo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Entry not found with id: " + id));
 
         entry.setAccountName(request.getAccountName());
         entry.setWebsite(request.getWebsite());
         entry.setUsername(request.getUsername());
 
-        entry.setPasswordEncrypted(
-                encryptionUtil.encrypt(request.getPassword()));
+        if (request.getPassword() != null && !request.getPassword().isEmpty()) {
+            entry.setPasswordEncrypted(encryptionUtil.encrypt(request.getPassword()));
+        }
 
         entry.setCategory(request.getCategory());
         entry.setNotes(request.getNotes());
@@ -114,9 +118,12 @@ public class PasswordEntryService {
 
         repo.save(entry);
 
+        System.out.println("Entry updated successfully");
+
         return mapToResponse(entry);
     }
-@Transactional
+
+    @Transactional
     public void deleteEntry(Long id) {
         repo.deleteById(id);
     }
@@ -158,6 +165,28 @@ public class PasswordEntryService {
         String json = objectMapper.writeValueAsString(entries);
         String encrypted = encryptionUtil.encryptWithKey(json, password);
         return encrypted.getBytes();
+    }
+
+    public byte[] exportVaultCsv(String username) throws Exception {
+        List<AllPasswordEntry> entries = repo.findByOwnerUsername(username);
+        StringBuilder csv = new StringBuilder("accountName,website,username,passwordEncrypted,category,notes\n");
+        for (AllPasswordEntry entry : entries) {
+            csv.append(escapeCsv(entry.getAccountName())).append(",")
+               .append(escapeCsv(entry.getWebsite())).append(",")
+               .append(escapeCsv(entry.getUsername())).append(",")
+               .append(escapeCsv(entry.getPasswordEncrypted())).append(",")
+               .append(escapeCsv(entry.getCategory())).append(",")
+               .append(escapeCsv(entry.getNotes())).append("\n");
+        }
+        return csv.toString().getBytes();
+    }
+
+    private String escapeCsv(String value) {
+        if (value == null) return "";
+        if (value.contains(",") || value.contains("\"") || value.contains("\n")) {
+            return "\"" + value.replace("\"", "\"\"") + "\"";
+        }
+        return value;
     }
 
     @Transactional
