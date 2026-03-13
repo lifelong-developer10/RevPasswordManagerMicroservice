@@ -93,23 +93,54 @@ trackById(index: number, item: any) {
    this.editMode = false;
    this.showForm = true;
  }
+
 openEdit(v: any) {
 
-  console.log("EDIT DATA:", v);
+  Swal.fire({
+    title: 'Enter Master Password',
+    input: 'password',
+    inputPlaceholder: 'Master Password',
+    showCancelButton: true
+  }).then((result) => {
 
-  this.editMode = true;
-  this.showForm = true;
+    if (!result.value) return;
 
-  this.form = {
-    id: v.id,   // VERY IMPORTANT
-    accountName: v.accountName,
-    website: v.website,
-    username: v.username,
-    password: v.password,
-    category: v.category,
-    notes: v.notes,
-    favorite: v.favorite
-  };
+    this.profileService.changePassword({
+      currentPassword: result.value,
+      newPassword: result.value,
+      confirmPassword: result.value
+    }).subscribe({
+
+      next: () => {
+
+        console.log("EDIT DATA:", v);
+
+        this.editMode = true;
+        this.showForm = true;
+
+        this.form = {
+          id: v.id,
+          accountName: v.accountName,
+          website: v.website,
+          username: v.username,
+          password: v.password,
+          category: v.category,
+          notes: v.notes,
+          favorite: v.favorite
+        };
+
+        // ⭐ Force UI refresh
+        this.cd.detectChanges();
+
+      },
+
+      error: () => {
+        Swal.fire("Error", "Incorrect Master Password", "error");
+      }
+
+    });
+
+  });
 
 }
   // Generator Options
@@ -130,10 +161,10 @@ openEdit(v: any) {
     const isInvalid = !f.accountName?.trim() || !f.website?.trim() || !f.username?.trim() || !f.password?.trim() || !f.category?.trim();
 
     if (isInvalid) {
-      Swal.fire({ 
-        icon: 'warning', 
-        title: 'Invalid Input', 
-        text: 'Fields cannot be empty. Please fill all required details.' 
+      Swal.fire({
+        icon: 'warning',
+        title: 'Invalid Input',
+        text: 'Fields cannot be empty. Please fill all required details.'
       });
       return;
     }
