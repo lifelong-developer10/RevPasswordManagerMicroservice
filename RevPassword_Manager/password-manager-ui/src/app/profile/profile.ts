@@ -176,8 +176,29 @@ Swal.fire({
 //
 //   }
 toggle2FA() {
-  this.user.twoFactorEnabled =
-    !this.user.twoFactorEnabled;
+
+  const enabled = !this.user.twoFactorEnabled;
+
+  this.profileService.update2FA(enabled)
+    .subscribe({
+
+      next: () => {
+
+        this.user.twoFactorEnabled = enabled;
+
+        Swal.fire({
+          icon: 'success',
+          title: enabled ? '2FA Enabled' : '2FA Disabled'
+        });
+
+      },
+
+      error: () => {
+        Swal.fire('Failed to update 2FA');
+      }
+
+    });
+
 
 }
 }
