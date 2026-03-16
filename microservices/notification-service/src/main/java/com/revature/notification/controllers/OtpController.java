@@ -20,7 +20,7 @@ public class OtpController {
     @PostMapping("/generate")
     public ResponseEntity<String> generate(@RequestBody OtpRequest request) {
 
-        String msg = otpService.generateOtp(request.getUsername());
+        String msg = otpService.generateAndSendOtp(request);
 
         return ResponseEntity.ok(msg);
     }
