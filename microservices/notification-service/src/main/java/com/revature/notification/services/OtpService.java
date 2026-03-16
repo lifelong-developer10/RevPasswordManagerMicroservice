@@ -1,61 +1,49 @@
 package com.revature.notification.services;
 
-import com.revature.notification.models.OTPGenerater;
-import com.revature.notification.repository.OtpRepository;
-import lombok.RequiredArgsConstructor;
+import com.revature.notification.dtos.OtpRequest;
+import com.revature.notification.repository.UserClient;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-import java.util.Random;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
-@RequiredArgsConstructor
 public class OtpService {
 
-    private final OtpRepository otpRepo;
+    @Autowired
+    private JavaMailSender mailSender;
 
-    public String generateOtp(String username) {
+    @Autowired
+    private UserClient userClient;
 
+    private Map<String, String> otpStorage = new HashMap<>();
 
+    public String generateAndSendOtp(OtpRequest user) {
 
-        String code = String.valueOf(100000 +
-                new Random().nextInt(900000));
+        String otp = String.valueOf((int) (Math.random() * 900000) + 100000);
 
-        OTPGenerater otp = new OTPGenerater();
+        otpStorage.put(user.getUsername(), otp);
 
-        otp.setCode(code);
-        otp.setOwnerUsername(username);
-        otp.setUsed(false);
-        otp.setExpiryTime(LocalDateTime.now().plusMinutes(5));
+        // call user service to get email
+        String email = userClient.getEmail(user.getUsername());
 
-        otpRepo.save(otp);
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(email);
+        message.setSubject("Your Login OTP");
+        message.setText("Your OTP for login is: " + otp);
 
+        mailSender.send(message);
 
-        System.out.println("OTP for " + username + " = " + code);
-
-        return "OTP sent successfully";
+        return "OTP sent successfully to email";
     }
 
-    public boolean verifyOtp(String username, String code) {
+    public boolean verifyOtp(String username, String otp) {
 
+        String storedOtp = otpStorage.get(username);
 
-
-        OTPGenerater otp = otpRepo
-                .findTopByOwnerUsernameOrderByExpiryTimeDesc(username)
-                .orElseThrow();
-
-        if (otp.isUsed())
-            throw new RuntimeException("OTP already used");
-
-        if (otp.getExpiryTime().isBefore(LocalDateTime.now()))
-            throw new RuntimeException("OTP expired");
-
-        if (!otp.getCode().equals(code))
-            throw new RuntimeException("Invalid OTP");
-
-        otp.setUsed(true);
-        otpRepo.save(otp);
-
-        return true;
+        return storedOtp != null && storedOtp.equals(otp);
     }
 }
