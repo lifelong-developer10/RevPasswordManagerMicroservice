@@ -263,3 +263,73 @@ input.form-control {
   font-size: 13px;
   text-decoration: none;
 }
+
+/* Floating security icons */
+
+.floating-icons{
+  position:absolute;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+  overflow:hidden;
+}
+
+.floating-icons span{
+  position:absolute;
+  font-size:26px;
+  opacity:0.12;
+  animation:floatIcons 8s linear infinite;
+}
+
+/* positions */
+
+.floating-icons span:nth-child(1){left:10%;top:80%}
+.floating-icons span:nth-child(2){left:20%;top:30%}
+.floating-icons span:nth-child(3){left:35%;top:60%}
+.floating-icons span:nth-child(4){left:50%;top:40%}
+.floating-icons span:nth-child(5){left:65%;top:75%}
+.floating-icons span:nth-child(6){left:80%;top:20%}
+.floating-icons span:nth-child(7){left:45%;top:10%}
+
+@keyframes floatIcons{
+
+  0%{
+    transform:translateY(0px) rotate(0deg);
+  }
+
+  50%{
+    transform:translateY(-60px) rotate(180deg);
+  }
+
+  100%{
+    transform:translateY(0px) rotate(360deg);
+  }
+
+}
+
+/* clickable login text */
+
+.login-link-text{
+  color:#8b5cf6;
+  cursor:pointer;
+  font-weight:600;
+}
+
+.login-link-text:hover{
+  text-decoration:underline;
+}
+
+.field input{
+  padding-right: 45px !important;
+}
+
+.eye{
+  position:absolute;
+  right:14px;
+  top:50%;
+  transform:translateY(-50%);
+  cursor:pointer;
+  color:#cbd5f5;
+  font-size:16px;
+  z-index:10;
+}

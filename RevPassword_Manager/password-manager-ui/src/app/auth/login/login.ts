@@ -41,13 +41,9 @@ togglePassword() {
   }
 ngOnInit() {
 
-  const savedPassword = localStorage.getItem('generatedPassword');
-
-  if (savedPassword && savedPassword.length >= 8) {
-    this.form.patchValue({
-      password: savedPassword
-    });
-  }
+  this.form.patchValue({
+    password: ''
+  });
 
 }
 logout() {

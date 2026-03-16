@@ -185,6 +185,9 @@ register() {
      }
    });
  }
+ goToLogin(){
+  this.router.navigate(['/login']);
+}
   // ================= LOGOUT =================
 
  logout() {

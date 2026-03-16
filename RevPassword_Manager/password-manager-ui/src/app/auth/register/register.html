@@ -1,5 +1,13 @@
 <div class="auth-page">
-
+<div class="floating-icons">
+  <span>🔒</span>
+  <span>🔑</span>
+  <span>🛡️</span>
+  <span>🔐</span>
+  <span>🔒</span>
+  <span>🛡️</span>
+  <span>🔑</span>
+</div>
   <div class="auth-card">
 
     <div class="user-icon">
@@ -137,8 +145,10 @@
       </div>
 
       <div class="links">
-        <a routerLink="/login">Already have account?</a>
-      </div>
+  <span class="login-link-text" (click)="goToLogin()">
+    Already have an account?
+  </span>
+</div>
 
     </form>
 

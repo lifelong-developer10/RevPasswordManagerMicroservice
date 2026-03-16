@@ -1,4 +1,14 @@
 <div class="login-wrapper">
+  <!-- Floating background icons -->
+<div class="floating-icons">
+  <span>🔒</span>
+  <span>🔑</span>
+  <span>🛡️</span>
+  <span>🔐</span>
+  <span>🔒</span>
+  <span>🔑</span>
+  <span>🛡️</span>
+</div>
   <div class="login-card">
     <div class="avatar"><i class="fa fa-user"></i></div>
     <h2>Login</h2>
@@ -16,6 +26,7 @@
           <input [type]="showPassword ? 'text':'password'" placeholder="Password" formControlName="password">
           <i class="fa eye" [ngClass]="showPassword ? 'fa-eye-slash':'fa-eye'" (click)="togglePassword()"></i>
         </div>
+        
 
         <div class="links">
           <a routerLink="/register">Register</a>
