@@ -5,9 +5,16 @@ import { LayoutComponent } from './auth/layout/layout';
 
 export const routes: Routes = [
 
-  // ================= AUTH PAGES =================
+  // ================= LANDING PAGE =================
 
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  {
+    path: '',
+    loadComponent: () =>
+      import('./landing/landing')
+        .then(m => m.LandingComponent)
+  },
+
+  // ================= AUTH PAGES =================
 
   {
     path: 'login',
@@ -29,7 +36,6 @@ export const routes: Routes = [
       import('./auth/forgot-password/forgot-password')
         .then(m => m.ForgotPasswordComponent)
   },
-
 
   // ================= MAIN APP (WITH SIDEBAR) =================
 
