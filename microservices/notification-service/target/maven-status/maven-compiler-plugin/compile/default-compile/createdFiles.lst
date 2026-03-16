@@ -1,7 +1,0 @@
-com\revature\notification\dtos\OtpVerifyRequest.class
-com\revature\notification\models\OTPGenerater.class
-com\revature\notification\NotificationServiceApplication.class
-com\revature\notification\controllers\OtpController.class
-com\revature\notification\dtos\OtpRequest.class
-com\revature\notification\services\OtpService.class
-com\revature\notification\repository\OtpRepository.class
