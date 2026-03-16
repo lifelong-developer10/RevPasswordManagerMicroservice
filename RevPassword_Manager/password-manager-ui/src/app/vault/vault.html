@@ -15,9 +15,27 @@
                [(ngModel)]="searchText"
                (input)="searchVault()">
 
+         <button class="btn"
+        [ngClass]="isFavoriteFilter ? 'btn-warning' : 'btn-outline-warning'"
+        (click)="toggleFavorites()">
+  <i class="fa fa-star"></i>
+  {{ isFavoriteFilter ? 'Show All' : 'Favorites' }}
+</button>    
+
         <button class="btn btn-primary" (click)="exportAccounts()">
-            <i class="fa fa-download"></i> Export Accounts
+            <i class="fa fa-upload"></i> Export Accounts
         </button>
+
+        <button class="btn btn-success" (click)="fileInput.click()">
+    <i class="fa fa-download"></i> Import Accounts
+</button>
+
+<input 
+    #fileInput 
+    type="file" 
+    accept=".csv" 
+    hidden 
+    (change)="importAccounts($event)">
 
       </div>
 

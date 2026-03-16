@@ -320,6 +320,28 @@ openEdit(v: any) {
       }
     });
   }
+
+importAccounts(event: any) {
+
+  const file = event.target.files[0];
+  const formData = new FormData();
+  formData.append("file", file);
+
+  this.vaultService.importCsv(formData).subscribe({
+    next: () => {
+      Swal.fire('Imported', 'Vault imported successfully', 'success');
+
+      this.loadVaults(); // ⭐ important
+    },
+    error: () => {
+      Swal.fire('Error', 'Import failed', 'error');
+    }
+  });
+
+}
+
+
+
   search() {
 
     if (!this.keyword) {

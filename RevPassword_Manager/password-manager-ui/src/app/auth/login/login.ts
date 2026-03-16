@@ -56,40 +56,76 @@ logout() {
 
   this.router.navigate(['/login']);
 }
+
 verifyLogin2FA() {
 
-  this.auth.verify2FA(this.twoFACode)
-    .subscribe((res: any) => {
+  const data = {
+    username: this.form.value.username,
+    otp: this.twoFACode
+  };
 
-      localStorage.setItem('token', res.token);
-      this.router.navigate(['/dashboard']);
+  this.auth.verify2FA(data)
+    .subscribe({
+
+      next: (res: any) => {
+
+        console.log("OTP RESPONSE:", res);
+
+        if(res.message === "INVALID_OTP"){
+          Swal.fire("Invalid OTP");
+          return;
+        }
+
+        // OTP correct
+        localStorage.setItem("token", res.token);
+
+        Swal.fire("Login Successful");
+
+        this.router.navigate(['/dashboard']);
+
+      },
+
+      error: (err) => {
+
+        console.error(err);
+
+        Swal.fire("OTP Verification Failed");
+
+      }
 
     });
 
+
 }
 login() {
+  if (this.form.invalid) return;
 
-   if (this.form.invalid) return;
+  // agar OTP screen already visible, dobara login nahi karna
+  if (this.show2FAScreen) return;
 
-   this.auth.login(this.form.value).subscribe({
+  this.auth.login(this.form.value).subscribe({
+    next: (res: any) => {
+      console.log("LOGIN RESPONSE:", res);
 
-     next: (res: any) => {
+      if (res.token === "OTP_REQUIRED") {
+        // OTP backend se aaya → turant screen show
+        this.show2FAScreen = true;
+        Swal.fire('OTP Sent', 'Check your email', 'info');
 
-       console.log('TOKEN:', res.token);
-
-       localStorage.setItem('token', res.token);
-      localStorage.removeItem('generatedPassword');
-        Swal.fire('Login Successful');
-
-       this.router.navigate(['/dashboard']);
-     },
-
-     error: () => {
-       Swal.fire('Invalid Credentials');
-     }
-
-   });
-
- }
-
+        // Username aur password already form me hai, dobara submit nahi karna
+        return;
+      } else {
+        const token = res.token;
+        console.log("TOKEN:", token);
+        localStorage.setItem("token", token);
+        Swal.fire("Login Successful");
+        this.router.navigate(['/dashboard']);
+      }
+    },
+    error: (err) => {
+      console.error(err);
+      Swal.fire("Login Failed");
+    }
+  });
+}
 }

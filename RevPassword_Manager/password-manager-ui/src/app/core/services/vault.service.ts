@@ -44,4 +44,12 @@ getLast() {
 exportCsv() {
   return this.http.get(`${this.API}/export/csv`, { responseType: 'blob' });
 }
+
+importCsv(formData: FormData) {
+  return this.http.post(
+    this.API + '/import/csv',
+    formData,
+    { responseType: 'text' }
+  );
+}
 }

@@ -8,7 +8,10 @@ import com.revature.vault.repository.PasswordEntryRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,6 +22,7 @@ public class PasswordEntryService {
 
     private final PasswordEntryRepository repo;
     private final EncryptionUtil encryptionUtil;
+    private final EncryptionService encryptionService;
 
 
 
@@ -187,6 +191,57 @@ public class PasswordEntryService {
                .append(escapeCsv(entry.getNotes())).append("\n");
         }
         return csv.toString().getBytes();
+    }
+
+//    public byte[] exportVault(String username) throws Exception {
+//        List<AllPasswordEntry> entries = repo.findByOwnerUsername(username)
+//                .stream()
+//                .map(p -> {
+//                    AllPasswordEntry dto = new AllPasswordEntry();
+//                    dto.setAccountName(p.getAccountName());
+//                    dto.setWebsite(p.getWebsite());
+//                    dto.setUsername(p.getUsername());
+//                    dto.setPasswordEncrypted(p.getPasswordEncrypted());
+//                    dto.setCategory(p.getCategory());
+//
+//                    dto.setNotes(p.getNotes());
+//                    return dto;
+//                }).collect(Collectors.toList());
+//
+//        String json = objectMapper.writeValueAsString(entries);
+//        String encrypted = encryptionService.encrypt(json);
+//        return encrypted.getBytes();
+//    }
+
+    public void importVaultCsv(String username, MultipartFile file) throws Exception {
+
+        BufferedReader reader = new BufferedReader(new InputStreamReader(file.getInputStream()));
+        String line;
+
+        boolean header = true;
+
+        while ((line = reader.readLine()) != null) {
+
+            if (header) {
+                header = false;
+                continue;
+            }
+
+            String[] data = line.split(",");
+
+            AllPasswordEntry entry = new AllPasswordEntry();
+            entry.setAccountName(data[0]);
+            entry.setWebsite(data[1]);
+            entry.setUsername(data[2]);
+            entry.setPasswordEncrypted(data[3]);
+            entry.setCategory(data[4]);
+            entry.setNotes(data[5]);
+            entry.setOwnerUsername(username);
+            entry.setCreatedAt(LocalDateTime.now());
+            entry.setUpdatedAt(LocalDateTime.now());
+
+            repo.save(entry);
+        }
     }
 
     private String escapeCsv(String value) {

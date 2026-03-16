@@ -40,13 +40,18 @@ public class MasterController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<AuthResponse> login(
-            @RequestBody LoginRequest req) {
+    public ResponseEntity<?> login(@RequestBody LoginRequest req) {
 
-        String token = service.login(req);
+        String result = service.login(req);
+
+        if(result.equals("OTP_REQUIRED")){
+            return ResponseEntity.ok(
+                    new AuthResponse("OTP_REQUIRED", "OTP Required")
+            );
+        }
 
         return ResponseEntity.ok(
-                new AuthResponse(token, "Login Successful")
+                new AuthResponse(result, "Login Successful")
         );
     }
 
