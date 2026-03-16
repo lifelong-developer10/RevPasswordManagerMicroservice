@@ -4,8 +4,22 @@ server:
 spring:
   application:
     name: vault-service
+
   config:
     import: "optional:configserver:http://localhost:8888"
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/vault_service_db?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false
+    username: root
+    password: 123456789
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+    show-sql: true
 
 eureka:
   client:
