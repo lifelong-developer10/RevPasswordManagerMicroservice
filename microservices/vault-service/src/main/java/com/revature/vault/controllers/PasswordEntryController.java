@@ -6,7 +6,11 @@ import com.revature.vault.models.AllPasswordEntry;
 import com.revature.vault.services.PasswordEntryService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 @RestController
@@ -49,6 +53,28 @@ public class PasswordEntryController {
 
         return service.updateEntry(username, id, request);
     }
+
+
+//    @GetMapping("/password/export")
+//    public ResponseEntity<byte[]> exportVault(@RequestHeader("X-Logged-In-Username") String username) throws Exception {
+//        byte[] data = service.exportVault(username);
+//        return ResponseEntity.ok()
+//                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=vault-backup.enc")
+//                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+//                .body(data);
+//    }
+
+    @PostMapping("/import/csv")
+    public ResponseEntity<String> importCsv(
+            @RequestHeader("X-Logged-In-Username") String username,
+            @RequestParam("file") MultipartFile file) throws Exception {
+
+        service.importVaultCsv(username, file);
+
+        return ResponseEntity.ok("Vault data imported successfully");
+    }
+
+
 
     @GetMapping("/export/csv")
     public org.springframework.http.ResponseEntity<byte[]> exportCsv(

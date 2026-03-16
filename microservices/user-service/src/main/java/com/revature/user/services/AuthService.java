@@ -30,6 +30,8 @@ public class AuthService {
         private final PasswordEncoder passwordEncoder;
         private final SecurityQuestionRepository userQuestionRepo;
         private final SecurityQuestionMasterRepository masterRepo;
+        private final OtpService otpService;
+        private final UserRepository userRepo;
 
         @Transactional
         public String register(RegisterRequest request) {
@@ -84,17 +86,37 @@ public class AuthService {
 
                 return "User Registered Successfully";
         }
+//
+//        public String login(LoginRequest request) {
+//
+//                Authentication authentication = authManager.authenticate(
+//                                new UsernamePasswordAuthenticationToken(
+//                                                request.getUsername(),
+//                                                request.getPassword()));
+//
+//                return jwtUtil.generateToken(authentication.getName());
+//        }
+
 
         public String login(LoginRequest request) {
 
                 Authentication authentication = authManager.authenticate(
-                                new UsernamePasswordAuthenticationToken(
-                                                request.getUsername(),
-                                                request.getPassword()));
+                        new UsernamePasswordAuthenticationToken(
+                                request.getUsername(),
+                                request.getPassword()));
+
+                MasterUser user =
+                        userRepo.findByUsername(authentication.getName()).orElseThrow();
+
+                if(user.isTwoFactorEnabled()){
+
+                        otpService.generateAndSendOtp(user);
+
+                        return "OTP_REQUIRED";
+                }
 
                 return jwtUtil.generateToken(authentication.getName());
         }
-
         public String changePassword(String username,
                         ChangePasswordRequest req) {
 

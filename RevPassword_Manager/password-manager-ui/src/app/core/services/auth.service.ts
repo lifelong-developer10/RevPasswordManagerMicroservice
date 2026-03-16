@@ -22,9 +22,15 @@ getQuestions() {
   );
 }
   login(data: any) {
-    return this.http.post(`${this.baseUrl}/login`, data);
-  }
 
+  return this.http.post<any>(
+    'http://localhost:8080/api/auth/login',
+    data
+  );
+
+}
+
+  
   saveToken(token: string) {
     localStorage.setItem('token', token);
   }
@@ -105,15 +111,23 @@ resetPassword(data: any) {
 checkUser(username: string) {
   return this.http.get(`http://localhost:8080/api/forgot/user-exists/${username}`)
 }
-enable2FA() {
-  return this.http.post(`${this.baseUrl}/api/auth/2fa/enable`, {});
+enable2FA(enabled: boolean) {
+  return this.http.post(
+    `${this.baseUrl}/api/profile/2fa`,
+    { enabled },
+    { responseType: 'text' as 'json' }
+  );
 }
 
-verify2FA(code: string) {
-  return this.http.post(`${this.baseUrl}/api/auth/2fa/verify`, { code });
-}
+verify2FA(data: any) {
 
+  return this.http.post<any>(
+    'http://localhost:8080/api/profile/verify-otp',
+    data
+  );
+
+}
 disable2FA() {
-  return this.http.post(`${this.baseUrl}/api/auth/2fa/disable`, {});
+  return this.http.post(`${this.baseUrl}/api/auth/2fa`, {});
 }
 }

@@ -30,8 +30,14 @@ export class ProfileService {
     return this.http.post(this.API + '/change-password', data);
   }
 
-  update2FA(enabled: boolean) {
-    return this.http.post(this.API + '/2fa', { enabled });
-  }
+ update2FA(enabled: boolean) {
+
+  return this.http.post(
+    'http://localhost:8080/api/profile/2fa',
+    { enabled },
+    { responseType: 'text' as 'json' }
+  );
+
+}
 
 }

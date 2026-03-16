@@ -3,9 +3,9 @@ package com.revature.user.controllers;
 
 import com.revature.user.dtos.*;
 import com.revature.user.models.MasterUser;
-import com.revature.user.models.SecurityQuestions;
 import com.revature.user.repository.UserRepository;
-import com.revature.user.security.CustomUserDetails;
+import com.revature.user.security.JwtUtil;
+import com.revature.user.services.OtpService;
 import com.revature.user.services.AuthService;
 import com.revature.user.services.ForgotPasswordService;
 import com.revature.user.services.SecurityQuestionService;
@@ -13,8 +13,6 @@ import com.revature.user.services.TwoFactorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,13 +20,15 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/profile")
 @RequiredArgsConstructor
-public class ProfileController {
+public class  ProfileController {
 
     private final UserRepository userRepository;
     private final AuthService authService;
     private final SecurityQuestionService security;
     private final TwoFactorService twoFactorService;
     private final ForgotPasswordService forgotPasswordService;
+    private final OtpService otpService;
+    private final JwtUtil jwtUtil;
 
     // ================= PROFILE =================
 
@@ -66,14 +66,14 @@ public class ProfileController {
     // ================= PASSWORD =================
 
     @PostMapping("/change-password")
-    public Map<String,String> changePassword(
+    public Map<String, String> changePassword(
             Authentication auth,
             @RequestBody ChangePasswordRequest req) {
-                String username = auth.getName();
+        String username = auth.getName();
 
         authService.changePassword(username, req);
 
-        return Map.of("message","Password Updated");
+        return Map.of("message", "Password Updated");
     }
 
     // ================= SECURITY QUESTIONS =================
@@ -109,6 +109,26 @@ public class ProfileController {
         return twoFactorService.updateTwoFactor(
                 username,
                 request.isEnabled());
+    }
+
+
+    @PostMapping("/verify-otp")
+    public ResponseEntity<AuthResponse> verifyOtp(@RequestBody OtpRequest request) {
+
+        boolean valid =
+                otpService.verifyOtp(request.getUsername(), request.getOtp());
+
+        if (!valid) {
+            return ResponseEntity.ok(
+                    new AuthResponse(null, "INVALID_OTP")
+            );
+        }
+
+        String token = jwtUtil.generateToken(request.getUsername());
+
+        return ResponseEntity.ok(
+                new AuthResponse(token, "OTP Verified")
+        );
     }
 }
 

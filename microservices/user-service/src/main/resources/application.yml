@@ -4,11 +4,22 @@ server:
 spring:
   application:
     name: user-service
+
   config:
     import: "optional:configserver:http://localhost:8888"
 
-# Keep only database specific settings if they differ, or rely on shared config.
-# Since we have central datasource in shared-config, we can remove it here.
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: soumya20901@gmail.com
+    password: blnv dsxu hltl jxik
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
 
 eureka:
   client:
