@@ -142,12 +142,20 @@ nextStep() {
       password += chars.charAt(Math.floor(Math.random() * chars.length));
     }
 
+     this.form.controls['password'].setValue(password); 
+
+  
+  this.checkStrength();
+
+  
+
+ 
+  this.showPassword = true;
+
     this.form.patchValue({
       password: password
     });
 
-    // ✅ Store only generated password
-    localStorage.setItem('generatedPassword', password);
 
     this.checkStrength();
   }

@@ -5,6 +5,7 @@ import { AuthService } from '../../core/services/auth.service';
 import { RouterModule } from '@angular/router';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { NotificationService } from '../../core/services/notification.service';
+import { ProfileService } from '../../core/services/profile.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -32,7 +33,8 @@ togglePassword() {
     private fb: FormBuilder,
     private auth: AuthService,
     private router: Router,
-    private notificationService: NotificationService 
+    private notificationService: NotificationService,
+    private profileService: ProfileService
     
   ) {
 
@@ -56,8 +58,9 @@ ngOnInit() {
 logout() {
 
   localStorage.removeItem('token');
-
-  this.router.navigate(['/login']);
+ localStorage.removeItem('username');
+    localStorage.removeItem('twoFactorEnabled');
+  this.router.navigate(['/landing']);
 }
 
 verifyLogin2FA() {
@@ -135,6 +138,13 @@ login() {
           const unreadCount = data.filter((n: any) => !n.readStatus).length;
 
           this.notificationService.setNotificationCount(unreadCount);
+        });
+
+        this.profileService.getProfile().subscribe((profile: any) => {
+  console.log("PROFILE AFTER LOGIN:", profile);
+  const twoFA = profile.twoFactorEnabled ?? false;
+  localStorage.setItem("twoFactorEnabled", String(twoFA));
+
         });
 
         this.router.navigate(['/dashboard']);

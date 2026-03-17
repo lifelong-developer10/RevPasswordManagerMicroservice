@@ -131,30 +131,29 @@ h2 {
 }
 .input-group {
   position: relative;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
- 
-.input-group i {
-  position: absolute;
-  left: 14px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #94a3b8;
-  font-size: 14px;
-  pointer-events: none;
-}
- 
+
 .input-group input {
   width: 100%;
-  padding: 12px 40px;   /* IMPORTANT */
-  padding-left: 42px;   /* SPACE FOR ICON */
-  border-radius: 10px;
-  border: 1px solid rgba(255,255,255,0.15);
- 
-  background: rgba(255,255,255,0.05);
-  color: white;
- 
-  outline: none;
+  padding-right: 40px; /* space for eye icon */
+  height: 40px;
+  box-sizing: border-box;
+}
+
+.input-group .toggle {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #555;
+  font-size: 16px;
+  z-index: 10; /* make sure clickable */
+}
+
+.input-group .toggle i {
+  pointer-events: none; /* icon itself doesn't capture click, span does */
 }
  
 .input-group input::placeholder {
