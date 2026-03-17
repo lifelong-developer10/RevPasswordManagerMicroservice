@@ -1,5 +1,6 @@
 package com.revature.vault.services;
 
+import com.revature.vault.client.NotificationClient;
 import com.revature.vault.dtos.PasswordEntryRequest;
 import com.revature.vault.dtos.PasswordEntryResponse;
 import com.revature.vault.models.AllPasswordEntry;
@@ -13,7 +14,9 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -23,6 +26,7 @@ public class PasswordEntryService {
     private final PasswordEntryRepository repo;
     private final EncryptionUtil encryptionUtil;
     private final EncryptionService encryptionService;
+    private final NotificationClient notificationClient;
 
 
 
@@ -53,7 +57,49 @@ public class PasswordEntryService {
 
         repo.save(entry);
 
+        // NORMAL NOTIFICATION
+        Map<String, String> notification = new HashMap<>();
+        notification.put("username", username);
+        notification.put("message", "Password saved for " + request.getAccountName());
+        notification.put("type", "INFO");
+
+        notificationClient.sendNotification(notification);
+
+
+        // ⭐ WEAK PASSWORD CHECK
+        String password = request.getPassword();
+
+        if (isWeakPassword(password)) {
+
+            Map<String, String> weakAlert = new HashMap<>();
+            weakAlert.put("username", username);
+            weakAlert.put(
+                    "message",
+                    "Security Alert: Weak password detected for " + request.getAccountName()
+            );
+            weakAlert.put("type", "SECURITY_ALERT");
+
+            notificationClient.sendNotification(weakAlert);
+        }
+
+
+
         return mapToResponse(entry);
+    }
+
+    private boolean isWeakPassword(String password) {
+
+        if (password == null) return true;
+
+        // weak if length < 8
+        if (password.length() < 8) return true;
+
+        boolean hasUpper = password.matches(".*[A-Z].*");
+        boolean hasLower = password.matches(".*[a-z].*");
+        boolean hasDigit = password.matches(".*[0-9].*");
+        boolean hasSpecial = password.matches(".*[!@#$%^&*()].*");
+
+        return !(hasUpper && hasLower && hasDigit && hasSpecial);
     }
 
     public PasswordEntryResponse getLastEntry(String username) throws Exception {

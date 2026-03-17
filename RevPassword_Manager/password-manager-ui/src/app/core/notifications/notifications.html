@@ -1,0 +1,46 @@
+<div class="notifications-container">
+ 
+  <h2 class="title">Notifications</h2>
+ 
+  <div *ngIf="notifications.length === 0" class="empty">
+    <div class="notification-icon">
+  🔔
+
+</div>
+    <h3>No notifications yet</h3>
+    <p>Security alerts and updates will appear here.</p>
+  </div>
+ 
+  <div *ngFor="let n of notifications" class="notification-card">
+ 
+    <div class="icon">🔐</div>
+ 
+    <div class="content">
+ 
+      <div class="message">
+        {{ n.message }}
+      </div>
+ 
+      <div class="time">
+        ID: {{ n.id }} | User: {{ n.username }}
+      </div>
+ 
+    </div>
+ 
+    <div class="actions">
+ 
+      <button *ngIf="!n.readStatus"
+              (click)="markAsRead(n.id)">
+        Mark Read
+      </button>
+ 
+      <button (click)="deleteNotification(n.id)">
+        Delete
+      </button>
+ 
+    </div>
+ 
+  </div>
+ 
+</div>
+ 

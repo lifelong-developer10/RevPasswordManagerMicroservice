@@ -1,0 +1,15 @@
+package com.revature.vault.client;
+
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import java.util.Map;
+
+@FeignClient(name = "notification-service", path = "/api/notifications")
+public interface NotificationClient {
+
+    @PostMapping("/send")
+    String sendNotification(@RequestBody Map<String, String> request);
+
+}

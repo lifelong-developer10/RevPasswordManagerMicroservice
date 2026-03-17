@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
 import { RouterModule } from '@angular/router';
 import { Component, ViewEncapsulation } from '@angular/core';
+import { NotificationService } from '../../core/services/notification.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -30,7 +31,9 @@ togglePassword() {
   constructor(
     private fb: FormBuilder,
     private auth: AuthService,
-    private router: Router
+    private router: Router,
+    private notificationService: NotificationService 
+    
   ) {
 
     this.form = this.fb.group({
@@ -97,10 +100,10 @@ verifyLogin2FA() {
 
 
 }
+
 login() {
   if (this.form.invalid) return;
 
-  // agar OTP screen already visible, dobara login nahi karna
   if (this.show2FAScreen) return;
 
   this.auth.login(this.form.value).subscribe({
@@ -108,17 +111,32 @@ login() {
       console.log("LOGIN RESPONSE:", res);
 
       if (res.token === "OTP_REQUIRED") {
-        // OTP backend se aaya → turant screen show
-        this.show2FAScreen = true;
-        Swal.fire('OTP Sent', 'Check your email', 'info');
 
-        // Username aur password already form me hai, dobara submit nahi karna
+        this.show2FAScreen = true;
+
+        Swal.fire('OTP Sent', 'Check your email', 'info');
         return;
+
       } else {
+
         const token = res.token;
         console.log("TOKEN:", token);
+
         localStorage.setItem("token", token);
+
+        const username = this.form.value.username;   // ✅ FIX (define kiya)
+        localStorage.setItem("username", username);
+
         Swal.fire("Login Successful");
+
+        // ✅ FIX: notificationService use karne ke liye username pass karo
+        this.notificationService.getNotifications(username).subscribe((data: any[]) => {
+
+          const unreadCount = data.filter((n: any) => !n.readStatus).length;
+
+          this.notificationService.setNotificationCount(unreadCount);
+        });
+
         this.router.navigate(['/dashboard']);
       }
     },

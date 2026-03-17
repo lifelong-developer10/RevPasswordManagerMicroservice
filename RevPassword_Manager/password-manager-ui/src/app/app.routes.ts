@@ -3,7 +3,17 @@ import { authGuard } from './core/guards/auth-guard';
 
 import { LayoutComponent } from './auth/layout/layout';
 
+import { NotificationsComponent } from './core/notifications/notifications';
+
+
 export const routes: Routes = [
+
+  {
+    path: '',
+    loadComponent: () =>
+      import('./core/landing/landing')
+        .then(m => m.LandingComponent)
+  },
 
   // ================= AUTH PAGES =================
 
@@ -65,7 +75,14 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./generator/generator')
             .then(m => m.GeneratorComponent)
-      }
+      },
+
+       {
+  path: 'notifications',
+  loadComponent: () =>
+    import('./core/notifications/notifications')
+      .then(m => m.NotificationsComponent)
+}
 
     ]
   }
