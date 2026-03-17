@@ -12,7 +12,7 @@
   <div class="login-card">
     <div class="avatar"><i class="fa fa-user"></i></div>
     <h2>Login</h2>
- 
+
     <!-- LOGIN FORM -->
     <div *ngIf="!show2FAScreen">
       <form [formGroup]="form">
@@ -20,24 +20,24 @@
           <i class="fa fa-user"></i>
           <input type="text" placeholder="Username" formControlName="username">
         </div>
- 
+
         <div class="field">
           <i class="fa fa-lock"></i>
           <input [type]="showPassword ? 'text':'password'" placeholder="Password" formControlName="password">
           <i class="fa eye" [ngClass]="showPassword ? 'fa-eye-slash':'fa-eye'" (click)="togglePassword()"></i>
         </div>
-       
- 
+        
+
         <div class="links">
           <a routerLink="/register">Register</a>
           <a routerLink="/forgot-password">Forgot Password?</a>
         </div>
- 
+
         <!-- 🔹 type button important -->
         <button type="button" class="login-btn" (click)="login()">LOGIN</button>
       </form>
     </div>
- 
+
     <!-- OTP FORM -->
     <div *ngIf="show2FAScreen">
       <h3>Enter OTP</h3>
@@ -47,7 +47,6 @@
       </div>
       <button type="button" class="login-btn" (click)="verifyLogin2FA()">VERIFY OTP</button>
     </div>
- 
+
   </div>
 </div>
- 
