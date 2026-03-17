@@ -79,9 +79,7 @@ ngOnInit() {
    });
  }
 
- goToLogin() {
-  this.router.navigate(['/login']);
-}
+
   // ================= Toggle Password =================
 
   togglePassword() {
