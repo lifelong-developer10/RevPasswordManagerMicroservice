@@ -1,40 +1,56 @@
 <nav class="navbar-glass">
-
+ 
   <!-- LEFT LOGO -->
   <div class="logo" (click)="goDashboard()">
-    🔐 <span>Password Manager</span>
+    <img
+      src="../../../assets/images/logo.png"
+      alt="logo"
+      class="logo-img"
+    >
   </div>
-
-
+ 
   <!-- CENTER MENU -->
   <div class="nav-links">
-
+ 
     <button (click)="goDashboard()">
       <i class="fa fa-chart-line"></i>
       Dashboard
     </button>
-
+ 
     <button (click)="goVault()">
       <i class="fa fa-key"></i>
       Vault
     </button>
-
+ 
     <button (click)="goProfile()">
       <i class="fa fa-user"></i>
       Profile
     </button>
+ 
+    <!-- ✅ FIXED NOTIFICATION BUTTON -->
+    <button (click)="goNotifications()" class="notification-btn">
+      
+      <span class="bell-wrapper">
+        <i class="fa fa-bell"></i>
 
-  </div>
+        <span *ngIf="notificationCount > 0" class="badge">
+          {{ notificationCount }}
+        </span>
+      </span>
 
-
+      <span>Notifications</span>
+    </button>
+ 
+  </div> <!-- ✅ IMPORTANT: nav-links closed -->
+ 
   <!-- RIGHT -->
   <div class="nav-right">
-
+ 
     <button class="logout-btn" (click)="logout()">
       <i class="fa fa-sign-out-alt"></i>
       Logout
     </button>
-
+ 
   </div>
-
+ 
 </nav>

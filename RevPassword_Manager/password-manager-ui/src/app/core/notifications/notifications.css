@@ -1,0 +1,145 @@
+.notifications-container{
+ 
+  max-width:900px;
+  margin:40px auto;
+ 
+  padding:30px;
+ 
+  border-radius:18px;
+ 
+  background: linear-gradient(
+      135deg,
+      rgba(124,77,255,0.12),
+      rgba(0,200,255,0.08)
+  );
+ 
+  backdrop-filter: blur(20px);
+ 
+  border:1px solid rgba(255,255,255,0.08);
+ 
+  box-shadow:0 0 30px rgba(124,77,255,0.25);
+ 
+  color:white;
+}
+ 
+ 
+/* TITLE */
+ 
+.title{
+  font-size:30px;
+  margin-bottom:30px;
+}
+ 
+ 
+/* EMPTY STATE */
+ 
+.empty{
+  text-align:center;
+  padding:60px 20px;
+  opacity:0.85;
+}
+ 
+.bell{
+  font-size:60px;
+  margin-bottom:15px;
+}
+ 
+ 
+/* CARD */
+ 
+.notification-card{
+ 
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+ 
+  padding:16px;
+ 
+  margin-bottom:12px;
+ 
+  border-radius:12px;
+ 
+  background:rgba(255,255,255,0.06);
+ 
+  border:1px solid rgba(255,255,255,0.08);
+ 
+  transition:0.25s;
+}
+ 
+.notification-card:hover{
+ 
+  background:rgba(255,255,255,0.10);
+ 
+  transform:translateY(-1px);
+}
+ 
+ 
+/* ICON */
+ 
+.icon{
+  font-size:22px;
+}
+ 
+ 
+/* CONTENT */
+ 
+.content{
+  flex:1;
+  margin-left:12px;
+}
+ 
+.message{
+  font-size:15px;
+  margin-bottom:4px;
+}
+ 
+.time{
+  font-size:12px;
+  opacity:0.7;
+}
+ 
+ 
+/* BUTTONS */
+ 
+.actions button{
+ 
+  margin-left:6px;
+ 
+  padding:6px 12px;
+ 
+  border:none;
+ 
+  border-radius:8px;
+ 
+  background:linear-gradient(
+      135deg,
+      #7c4dff,
+      #00c8ff
+  );
+ 
+  color:white;
+ 
+  cursor:pointer;
+ 
+  font-size:12px;
+}
+ 
+.actions button:hover{
+  opacity:0.9;
+}
+
+.notification-icon {
+  position: relative;
+  cursor: pointer;
+}
+
+.badge {
+  position: absolute;
+  top: -5px;
+  right: -10px;
+  background: red;
+  color: white;
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 50%;
+}

@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { VaultService } from '../core/services/vault.service';
 import { ProfileService } from '../core/services/profile.service';
 import { FormsModule } from '@angular/forms';
+import { NotificationService } from '../core/services/notification.service'
 import Swal from 'sweetalert2';
 @Component({
   selector: 'app-dashboard',
@@ -38,7 +39,8 @@ constructor(
   private vaultService: VaultService,
   private profileService: ProfileService,
   private router: Router,
-  private cd: ChangeDetectorRef
+  private cd: ChangeDetectorRef,
+   private notificationService: NotificationService 
 ) {}
 
 ngOnInit() {
@@ -171,6 +173,19 @@ addVault() {
 
       this.loadVaultSummary();
       this.loadLastAccount();
+
+      // 🔥🔥🔥 ADD THIS (IMPORTANT)
+      const username = localStorage.getItem('username');
+
+      if (username) {
+        this.notificationService.getNotifications(username).subscribe((data: any[]) => {
+
+          const unreadCount = data.filter((n: any) => !n.readStatus).length;
+
+          this.notificationService.setNotificationCount(unreadCount);
+        });
+      }
+
       this.cd.detectChanges();
     },
 
