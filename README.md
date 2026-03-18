@@ -50,6 +50,10 @@ The **Password Manager** is a full-stack web application that allows users to se
 ---
 
 ## 📸 Application Screenshots
+<img width="1083" height="612" alt="image" src="https://github.com/user-attachments/assets/d2c40ae0-32f6-4029-bfe8-b2f777be72b5" />
+
+
+<img width="1341" height="634" alt="image" src="https://github.com/user-attachments/assets/1cedd17d-feee-434a-85ed-17946c631f00" />
 
 ---
 
