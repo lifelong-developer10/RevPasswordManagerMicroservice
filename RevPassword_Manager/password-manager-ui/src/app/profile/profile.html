@@ -107,17 +107,18 @@
               [class.text-success]="user.twoFactorEnabled"
               [class.text-danger]="!user.twoFactorEnabled">
 
-              {{ user.twoFactorEnabled ? 'Enabled' : 'Disabled' }}
+              {{ user?.twoFactorEnabled ? 'Enabled' : 'Disabled' }}
 
             </span>
           </p>
 
           <button class="btn btn-gradient btn-primary"
-                  (click)="toggle2FA()">
+        (click)="toggle2FA()"
+        [disabled]="!user">
 
-            {{ user.twoFactorEnabled ? 'Disable 2FA' : 'Enable 2FA' }}
+  {{ user?.twoFactorEnabled ? 'Disable 2FA' : 'Enable 2FA' }}
 
-          </button>
+</button>
 
         </div>
 

@@ -45,15 +45,30 @@ export class ProfileComponent implements OnInit {
 
   loadProfile() {
 
-    this.profileService.getProfile()
-      .subscribe((res: any) => {
-        this.user = res;
-              this.cd.detectChanges();   // ⭐ IMPORTANT
+  this.profileService.getProfile()
+    .subscribe((res: any) => {
 
-         this.loadQuestions();
-      });
+      this.user = res;
 
-  }
+      if (this.user.twoFactorEnabled === undefined) {
+
+        const stored2FA = localStorage.getItem("twoFactorEnabled");
+
+        if (stored2FA !== null) {
+          this.user.twoFactorEnabled = stored2FA === 'true';
+        } else {
+          this.user.twoFactorEnabled = false;
+        }
+      }
+
+      console.log("PROFILE DATA:", this.user);
+
+      this.cd.detectChanges();   
+
+      this.loadQuestions();
+    });
+
+}
 
   // ================= LOAD QUESTIONS =================
 loadQuestions() {
@@ -85,7 +100,7 @@ Swal.fire({
   icon: 'success',
   title: 'Success',
   text: 'Profile Updated successfully'
-});      this.loadProfile();   // ✅ IMPORTANT
+});      this.loadProfile();   
     });
 
 }
@@ -185,6 +200,9 @@ toggle2FA() {
       next: () => {
 
         this.user.twoFactorEnabled = enabled;
+        this.cd.detectChanges();
+
+        
 
         Swal.fire({
           icon: 'success',
@@ -198,7 +216,5 @@ toggle2FA() {
       }
 
     });
-
-
 }
 }

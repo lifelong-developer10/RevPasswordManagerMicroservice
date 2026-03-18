@@ -41,6 +41,8 @@ getQuestions() {
 
   logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('username');
+    localStorage.removeItem('twoFactorEnabled');
   }
 
   isLoggedIn(): boolean {
