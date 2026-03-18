@@ -47,7 +47,6 @@ The **Password Manager** is a full-stack web application that allows users to se
 **Database:** MySQL
 
 
-
 ---
 
 ## 📸 Application Screenshots
@@ -59,8 +58,7 @@ The **Password Manager** is a full-stack web application that allows users to se
 The ERD diagram represents the database structure and relationships between entities such as Users, Password Vault Entries, and Security Questions.
 
 Example:
-
-![img_6.png](img_6.png)
+![img.png](img.png)
 ---
 
 ---
